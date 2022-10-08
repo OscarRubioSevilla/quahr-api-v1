@@ -28,61 +28,8 @@ export default sequelize.define('UsuarioModel', {
     },
     tipo_usuario: {
         type: DataTypes.ENUM("Administrador", "Dentista", "Asistente"),
-        allowNull: false // STRING representa varchar
-    },
-    email: {
-        type: DataTypes.STRING(),
         allowNull: false,
-        unique: true,
-        validate: {
-            isEmail: true,
-
-            notEmpty: {
-                msg: 'Email requerido'
-            },
-            len: {
-                args: [0, 254],
-                msg: 'Email debe ser menor a 254 caracteres'
-            }
-        }
-    },
-    password: {
-        type: DataTypes.STRING(60),
-        allowNull: false
-    },
-    verificacion_2pasos: {
-        type: DataTypes.TINYINT,
-        allowNull: false
-    },
-    codigo_verificacion: {
-        type: DataTypes.INTEGER(6),
-        allowNull: false
-    },
-    fecha_codigo_verificacion: {
-        type: DataTypes.DATE,
-        allowNull: false
-    },
-    intentos_login: {
-        type: DataTypes.TINYINT,
-        allowNull: false
-    },
-    recuperar_password_hash: {
-        type: DataTypes.STRING(32),
-        allowNull: false
-    },
-    fecha_registro: {
-        type: DataTypes.DATE,
-        allowNull: false
-    },
-
-    ultimo_inicio: {
-        type: DataTypes.DATE,
-        allowNull: false
-    },
-    email_secundario: {
-        type: DataTypes.STRING(254),
-        unique: true,
-        allowNull: false
+        defaultValue: 'Administrador'
     },
     nombre: {
         type: DataTypes.STRING(100),
@@ -96,60 +43,79 @@ export default sequelize.define('UsuarioModel', {
         type: DataTypes.STRING(50),
         allowNull: false
     },
-    prefijo: {
-        type: DataTypes.ENUM('', 'Dra.', 'Dr.'),
+    email: {
+        type: DataTypes.STRING(),
+        allowNull: false,
+        unique: true,
+        validate: {
+            isEmail: true,
+            notEmpty: {
+                msg: 'Email requerido'
+            },
+            len: {
+                args: [0, 254],
+                msg: 'Email debe ser menor a 254 caracteres'
+            }
+        }
+    },
+    password: {
+        type: DataTypes.STRING(60),
         allowNull: false
-    },
-    especialidad: {
-        type: DataTypes.STRING(30),
-        allowNull: false
-    },
-    nombre_comunidad: {
-        type: DataTypes.STRING(100),
-        allowNull: false
-    },
-    nombre_comunidad_fecha: {
-        type: DataTypes.DATE,
-        allowNull: true
-    },
-    ingreso_comunidad: {
-        type: DataTypes.BOOLEAN(false),
-        allowNull: true
     },
     genero: {
         type: DataTypes.ENUM('Masculino', 'Femenino', 'Otro'),
         allowNull: false
-    }
-    //aqui iria direccion
-
-    ,
+    },
+    verificacion_2pasos: {
+        type: DataTypes.TINYINT
+    },
+    codigo_verificacion: {
+        type: DataTypes.INTEGER(6)
+    },
+    fecha_codigo_verificacion: {
+        type: DataTypes.DATE
+    },
+    intentos_login: {
+        type: DataTypes.TINYINT
+    },
+    recuperar_password_hash: {
+        type: DataTypes.STRING(32)
+    },
+    ultimo_inicio: {
+        type: DataTypes.DATE
+    },
+    prefijo: {
+        type: DataTypes.ENUM('', 'Dra.', 'Dr.')
+    },
+    especialidad: {
+        type: DataTypes.STRING(30)
+    },
+    comunidad_nombre: {
+        type: DataTypes.STRING(100)
+    },
+    comunidad_fecha: {
+        type: DataTypes.DATE
+    },
+    comunidad_ingreso: {
+        type: DataTypes.BOOLEAN(false)
+    },
     cedula_profesional: {
-        type: DataTypes.STRING(50),
-        allowNull: false
+        type: DataTypes.STRING(50)
     },
     visita_comunidad: {
-        type: DataTypes.DATE,
-        allowNull: false
+        type: DataTypes.DATE
     },
     ruta: {
         type: DataTypes.STRING(200),
-        allowNull: false
+        defaultValue: 'usuario-default.png'
     },
     ruta_comunidad: {
         type: DataTypes.STRING(200),
-        allowNull: false
+        defaultValue: 'usuario-default.png'
     },
     meses_visitas_panel: {
-        type: DataTypes.INTEGER(2),
-        allowNull: false
+        type: DataTypes.INTEGER(2)
     }
-
 }, {
-
-    tableName: 'usuarios' // Así designas el nombre
-        //como era para que fuera el correo que?hay algun atributo o restriccion para el correo
-        // No viene la restricción pero par todos los campo que encuntres email o correo ponle unique
-        // algo que debes hacer es que las llaves foraneas no llevan autoincrement
-        //que hacemos con la foranea primero quitar el uto
-        // ok, ahora debes de importar los modelos que hagan referencia a la llave foranea
-})
+    tableName: 'usuarios'
+});

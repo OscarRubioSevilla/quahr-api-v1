@@ -1,4 +1,4 @@
-import Clinicas_configurarionModel from "./clinicas_configurarion.model";
+import Clinicas_configurarionModel from "./clinicas_configuracion.model";
 
 
 export const getAll = async(req, res) => {

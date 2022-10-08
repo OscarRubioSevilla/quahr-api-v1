@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAll } from './clinicas_configurarion.controller';
+import { getAll } from './clinicas_configuracion.controller';
 
 const apiRotes = express.Router();
 

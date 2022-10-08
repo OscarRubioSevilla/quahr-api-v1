@@ -12,32 +12,32 @@ export default sequelize.define('ClinicaModel', {
         allowNull: false // por defecto permite nulo
     },
     nombre: {
-        type: STRING(200), // STRING representa varchar
-    },
-
-    telefono_fijo: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+        type: STRING(200)
     },
     telefono_celular: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
+    telefono_fijo: {
+        type: DataTypes.INTEGER
+    },
     consentimiento_informado: {
         type: DataTypes.ENUM('No seleccionado', 'Predeterminado', 'Personalizado'),
-        allowNull: false
+        defaultValue: 'Predeterminado'
     },
-    mensaje_mail: {
-        type: DataTypes.TEXT,
-        allowNull: true
+    logo_clinica: {
+        type: DataTypes.TINYINT(1),
+        allowNull: 'clinica-default.png'
     },
-    firma_mail: {
-        type: DataTypes.STRING(255),
-        allowNull: true
+    email_mensaje: {
+        type: DataTypes.TEXT
+    },
+    email_firma: {
+        type: DataTypes.STRING(255)
     },
     ruta: {
         type: DataTypes.STRING(200),
-        allowNull: false
+        defaultValue: 'clinica-default.png'
     },
 }, {
     tableName: 'clinicas' // Así designas el nombre
