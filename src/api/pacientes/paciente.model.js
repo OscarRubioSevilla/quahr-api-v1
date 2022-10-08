@@ -39,54 +39,33 @@ export default sequelize.define('PacienteModel', {
             allowNull: false
         },
         genero: {
-            type: DataTypes.ENUM('Masculino', 'Femenino', 'Otro'),
-            allowNull: false
+            type: DataTypes.ENUM('Masculino', 'Femenino', 'Otro')
         },
         ocupacion: {
-            type: DataTypes.STRING(50),
-            allowNull: false
+            type: DataTypes.STRING(50)
         },
         email: {
             type: DataTypes.STRING(254),
             unique: true,
             validate: {
                 isEmail: true
-            },
-            allowNull: false
-        }
-        //Aqui deberia ir la direccion
-
-        ,
+            }
+        },
         contacto_emergencia: {
             type: DataTypes.INTEGER,
             allowNull: false
-
         },
-        contacto_emergencia_parentezco: {
-            type: DataTypes.INTEGER,
-
-
+        contacto_emergencia_parentesco: {
+            type: DataTypes.INTEGER
         },
         contacto_emergencia_telefono: {
-            type: DataTypes.INTEGER,
-            allowNull: false
+            type: DataTypes.INTEGER
         },
         notas: {
-            type: DataTypes.STRING(1200),
-            allowNull: true
-        },
-        fecha_registro: {
-            type: DataTypes.DATE,
-            allowNull: false
-        },
-        fecha_modificacion: {
-            type: DataTypes.DATE,
-            allowNull: false
+            type: DataTypes.STRING(1200)
         },
         fecha_ultima_consulta: {
-            type: DataTypes.DATE,
-            allowNull: false
+            type: DataTypes.DATE
         }
     }, { tableName: 'pacientes' }
-
 )
