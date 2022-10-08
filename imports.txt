@@ -1,0 +1,68 @@
+// todos los archivos que importes de otras ca
+/* de otras carptas dben tener su xtension
+en st caso .js
+
+recurda que cuando exportas objetos con nombre
+debe de ser el nombre el cual está declarado}
+
+
+si tienes mas de un objeto entonces 
+puedes poner una coma por ejemplo
+
+AHORA QUE SI EXPORTAS POR DEFECTO TODO EL MODULO
+solo debes de poner el nombre
+
+asi haces referencia a ese export
+
+me explico?
+cuando son varios objetos o funciones  se utiliza el {eso}
+y cuando es uno solo es asi normal
+asi es
+hay ocasiones qu no necesitas exportar nada
+y no pones ningun export 
+
+export default -- import cualquiernombre
+export const algo_especifico -- import { algo_especifico }
+
+*/
+// POr si necesitas refrescr rapido
+
+// Hay dos formas de exportr por defecto
+// Algo similar a l que pusiste pero no se si funcione
+// export default sequelize.define('ClinicaModel'
+// export default nombre de la funcion o contante o variable
+
+//Cualquiera es valida la primera es mas corta
+
+//**MODELOS***/
+
+// AQui vas a cargar los modelos
+// IMPORTANTE debes d cargarlos en orden de importacia
+// por ejemplo usuarios depende de clinicas
+// Primero importas clinicas
+// Segundo usuarios
+// Así cuando requiera el modelo y está cargado
+
+// Importa el primer modelo
+import "../../src/api/clinicas/clinica.model.js"; // así error
+// Ese es el mensaje correcto lo otro era porque pusiste mal la ruta
+
+
+// Ok la importación sería un éxito solo una sugerencia
+// CLinicamOdel no se va  utilizar en este archivo
+// Ademas de que no lo estás exportando por lo tanto creo que fallaria
+// Falla por esa razon, pero como te comente no vamos a usar eso, entonces
+// lo que se debe de hacer es lo que hice con el archivo de importaciones
+
+
+// Con eso ya puedes crear tablas ahora viste que el nombre de la tabla es algo raro
+// Esto se debe a que sequelize le añade una s al nombre del modelo para convertirlas en plurales
+// para cambiar el nombre debes usar un atributo en el modelo tableName
+
+// Par que se vean reflejados los cambios debes de añadir un atrbuto al metodo sync({ alter: true })
+
+// Se queda la anterior para eliminarla puedes usar el mismo modelo creado y eliminar las tablas pero pra pruebas solo añade un 
+// un nuevo atributo a sync({ force: true })
+
+// Por alguna razón no la elimina creo que es porque no la toma en cuenta, así que si t equivocas de nombre de tabla y la quieres cmbiar
+// debes de hacer eso

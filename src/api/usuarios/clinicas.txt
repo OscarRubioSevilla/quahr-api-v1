@@ -1,0 +1,7 @@
+clinicas
+clinicas_configuracion - modelo 
+clinicas_direccion - modelo 
+usuarios
+usuarios_direccion - modelo 
+pacientes
+pacientes_direccion - modelo 
