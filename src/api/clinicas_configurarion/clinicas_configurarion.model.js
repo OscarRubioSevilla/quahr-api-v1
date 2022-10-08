@@ -15,7 +15,7 @@ export default sequelize.define('Clinicas_configuracionModel', {
         allowNull: false,
         references: {
             model: ClinicaModel,
-            key: id
+            key: 'id'
         }
     },
     paquete: {

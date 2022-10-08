@@ -44,10 +44,10 @@ app.listen(3000, function() {
 // sincronizar con db
 
 // Revisa con calma porque no autocompleta los modulos
-// await sequelize.dropAllSchemas();
+await sequelize.dropAllSchemas();
 // ok era eso
 // revisa async await top level
-await sequelize.sync({ alter: true }); // Eliminará campos y registros
+await sequelize.sync({ alter: true, alter: true }); // Eliminará campos y registros
 
 
 console.log('Db connected') // api/clinicas/clinica.model.js

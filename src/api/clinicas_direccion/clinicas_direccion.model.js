@@ -1,17 +1,17 @@
-import { sequelize } from "../../db/sequelize";
+import { sequelize } from "../../db/sequelize.js";
 import { DataTypes } from 'sequelize';
 import ClinicaModel from '../clinicas/clinica.model.js'
-import DireccionModel from "../direccion/direccion_model";
+import DireccionModel from "../direccion/direccion_model.js";
 
-export default clinicas_direccion = sequelize.define('clinicas_direccionModel', {
+export default sequelize.define('clinicas_direccionModel', {
     id: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
     clinica_id: {
         type: DataTypes.BIGINT,
-        references: { key: id, model: ClinicaModel }
+        references: { key: 'id', model: ClinicaModel }
     },
     direccion_id: {
         type: DataTypes.BIGINT,
-        references: { key: id, model: DireccionModel }
+        references: { key: 'id', model: DireccionModel }
     },
     calle: {
         type: DataTypes.STRING(100),

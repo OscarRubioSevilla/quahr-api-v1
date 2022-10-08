@@ -1,7 +1,7 @@
-import { sequelize } from './../../db/sequelize';
+import { sequelize } from './../../db/sequelize.js';
 import { DataTypes } from 'sequelize';
 
-import PacienteModel from '../pacientes/paciente.model';
+import PacienteModel from '../pacientes/paciente.model.js';
 import Direccion_model from '../direccion/direccion_model.js';
 
 

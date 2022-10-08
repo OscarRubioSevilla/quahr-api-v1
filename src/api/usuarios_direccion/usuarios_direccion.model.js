@@ -1,6 +1,6 @@
-import { sequelize } from './../../db/sequelize';
+import { sequelize } from './../../db/sequelize.js';
 import { DataTypes } from 'sequelize';
-import { UsuariosModel } from '../usuarios/usuario.model.js'
+import UsuariosModel from '../usuarios/usuario.model.js'
 import DireccionModel from '../direccion/direccion_model.js';
 
 export default sequelize.define('usuarios_direccionModel', {
@@ -14,14 +14,14 @@ export default sequelize.define('usuarios_direccionModel', {
         type: DataTypes.BIGINT,
         references: {
             model: UsuariosModel,
-            key: id
+            key: 'id'
         }
     },
     direccion_id: {
         type: DataTypes.BIGINT,
         references: {
             model: DireccionModel,
-            key: id
+            key: 'id'
         }
     },
 
