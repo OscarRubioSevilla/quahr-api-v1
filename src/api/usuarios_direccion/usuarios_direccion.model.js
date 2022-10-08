@@ -1,7 +1,7 @@
 import { sequelize } from './../../db/sequelize';
 import { DataTypes } from 'sequelize';
 import { UsuariosModel } from '../usuarios/usuario.model.js'
-import Direccion_model from '../direccion/direccion_model.js';
+import DireccionModel from '../direccion/direccion_model.js';
 
 export default sequelize.define('usuarios_direccionModel', {
     id: {
@@ -20,7 +20,7 @@ export default sequelize.define('usuarios_direccionModel', {
     direccion_id: {
         type: DataTypes.BIGINT,
         references: {
-            model: Direccion_model,
+            model: DireccionModel,
             key: id
         }
     },
@@ -43,6 +43,7 @@ export default sequelize.define('usuarios_direccionModel', {
     },
     localidad: {
         type: DataTypes.STRING(30),
+        allowNull: false
 
     },
     municipio_id: {
@@ -57,7 +58,4 @@ export default sequelize.define('usuarios_direccionModel', {
         type: DataTypes.INTEGER,
 
     }
-
-
-
-})
+}, { tableName: 'usuarios_direccionModel' })

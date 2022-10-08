@@ -3,13 +3,13 @@ import { DataTypes } from 'sequelize';
 import ClinicaModel from '../clinicas/clinica.model.js'
 import DireccionModel from "../direccion/direccion_model";
 
-export default clinicas_direccion = sequelize.define('clinicas_direccion', {
+export default clinicas_direccion = sequelize.define('clinicas_direccionModel', {
     id: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
     clinica_id: {
         type: DataTypes.BIGINT,
         references: { key: id, model: ClinicaModel }
     },
-    id: {
+    direccion_id: {
         type: DataTypes.BIGINT,
         references: { key: id, model: DireccionModel }
     },
@@ -46,4 +46,4 @@ export default clinicas_direccion = sequelize.define('clinicas_direccion', {
 
     }
 
-})
+}, { tableName: 'clinicas_direccion' })

@@ -87,7 +87,4 @@ export default sequelize.define('Clinicas_configuracionModel', {
         allowNull: true
     }
 
-
-
-
 })

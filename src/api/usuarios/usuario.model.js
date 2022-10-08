@@ -144,11 +144,6 @@ export default sequelize.define('UsuarioModel', {
         allowNull: false
     }
 
-
-
-
-
-
 }, {
 
     tableName: 'usuarios' // Así designas el nombre
