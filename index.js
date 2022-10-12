@@ -8,17 +8,7 @@ import apiRoutes from './src/api/index.js';
 import { sequelize } from "./src/db/sequelize.js";
 import './src/db/importaciones.js'; // no lleva un nombre solo importas el archivo
 
-
-// Declaraciones orden 2
-// Crear el app de expres
 const app = express();
-
-
-// Voy a llevar a Patsy a la parada del camnion
-// Llena el postman con los demas rutas
-// y crea el api de usuarios va? Ahorita regresosii
-
-
 
 // middlewares
 // app.use(morgan('dev')) // Muestra las peticiones que se hacen al servidor
@@ -32,22 +22,14 @@ app.use('/api', express.json(), apiRoutes)
 // Routes
 
 
-// crear el servidor de express
+// Listo servidor corriendo
 app.listen(3000, function() {
     console.log('Servidor corriendo en http://localhost:3000')
 })
 
-
-// Listo servidor corriendo
-
-
-// sincronizar con db
-
-// Revisa con calma porque no autocompleta los modulos
-await sequelize.dropAllSchemas();
-// ok era eso
+//await sequelize.dropAllSchemas();
 // revisa async await top level
-await sequelize.sync({ alter: true, alter: true }); // Eliminará campos y registros
+await sequelize.sync({ alter: true }); // Eliminará campos y registros
 
 
-console.log('Db connected') // api/clinicas/clinica.model.js
+console.log('Db connected')

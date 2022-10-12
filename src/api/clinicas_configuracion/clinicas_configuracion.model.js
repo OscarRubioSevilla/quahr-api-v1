@@ -18,6 +18,14 @@ export default sequelize.define('Clinicas_configuracionModel', {
             key: 'id'
         }
     },
+    configuracion_id: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        references: {
+            model: ClinicaModel,
+            key: 'id'
+        }
+    },
     paquete: {
         type: DataTypes.INTEGER(11),
         defaultValue: 3
@@ -73,4 +81,4 @@ export default sequelize.define('Clinicas_configuracionModel', {
     id_google_business: {
         type: DataTypes.INTEGER
     }
-})
+}, { tableName: 'clinicas_configuracion' })

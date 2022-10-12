@@ -42,4 +42,4 @@ export default sequelize.define('direccionModel', {
         type: DataTypes.INTEGER,
 
     },
-})
+}, { tableName: 'direcciones' })

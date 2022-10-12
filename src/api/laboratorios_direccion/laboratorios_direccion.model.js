@@ -1,28 +1,21 @@
-import { sequelize } from './../../db/sequelize.js';
+import { sequelize } from "../../db/sequelize.js";
 import { DataTypes } from 'sequelize';
-import UsuariosModel from '../usuarios/usuario.model.js'
-import DireccionModel from '../direccion/direccion_model.js';
+import DireccionModel from "../direccion/direccion_model.js";
+import laboratoriosModel from "../laboratorios/laboratorios.model.js";
 
-export default sequelize.define('usuarios_direccionModel', {
+export default sequelize.define('laboratorios_direccionModel', {
     id: {
+        type: DataTypes.BIGINT,
         primaryKey: true,
-        type: DataTypes.BIGINT,
-        autoIncrement: true,
-        allowNull: false
+        autoIncrement: true
     },
-    usuario_id: {
+    laboratorio_id: {
         type: DataTypes.BIGINT,
-        references: {
-            model: UsuariosModel,
-            key: 'id'
-        }
+        references: { key: 'id', model: laboratoriosModel }
     },
     direccion_id: {
         type: DataTypes.BIGINT,
-        references: {
-            model: DireccionModel,
-            key: 'id'
-        }
+        references: { key: 'id', model: DireccionModel }
     },
     calle: {
         type: DataTypes.STRING(100),
@@ -36,16 +29,17 @@ export default sequelize.define('usuarios_direccionModel', {
         type: DataTypes.STRING(10),
         allowNull: false
     },
-    codigo_postal: {
+    cp: {
         type: DataTypes.STRING(20),
         allowNull: false
     },
     localidad: {
         type: DataTypes.STRING(30),
-        allowNull: false
+
     },
     municipio_id: {
         type: DataTypes.INTEGER,
+
     },
     estado_id: {
         type: DataTypes.INTEGER,
@@ -53,5 +47,7 @@ export default sequelize.define('usuarios_direccionModel', {
     },
     pais_id: {
         type: DataTypes.INTEGER,
+
     }
-}, { tableName: 'usuarios_direccion' })
+
+}, { tableName: 'laboratorios_direccion' })
