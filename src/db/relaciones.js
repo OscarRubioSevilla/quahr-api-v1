@@ -40,11 +40,10 @@ ClinicaModel.hasOne(ClinicasDireccion, { foreignKey: 'clinica_id' });
 ClinicasDireccion.belongsTo(ClinicaModel, { foreignKey: 'clinica_id' });
 
 UsuarioModel.hasOne(UsuariosDireccion, {  foreignKey: 'usuario_id', as: 'direccion' });
-UsuariosDireccion.belongsTo(UsuarioModel, { foreignKey: 'usuario_id' });
+UsuariosDireccion.belongsTo(UsuarioModel, { foreignKey: 'usuario_id', as: 'usuario' });
 
 PacienteModel.hasOne(PacientesDireccionModel, { foreignKey: 'paciente_id' });
 PacientesDireccionModel.belongsTo(PacienteModel, {  foreignKey: 'paciente_id' });
-
 
 UsuarioModel.hasMany(LaboratorioModel, { foreignKey: 'usuario_id', as: 'laboratorios' });
 LaboratorioModel.belongsTo(UsuarioModel, { foreignKey: 'usuario_id', as: 'usuario' });

@@ -1,6 +1,5 @@
+import { createCode } from "../../utils/utils.js";
 import laboratoriosModel from "./laboratorios.model.js";
-
-
 
 export const getAll = async(req, res) => {
     try {
@@ -38,11 +37,11 @@ export const getOne = async(req, res) => {
 
     }
 }
+
 export const create = async(req, res) => {
     try {
         const {
             usuario_id,
-            laboratorio_codigo,
             nombre,
             contacto,
             telefono_fijo,
@@ -51,7 +50,20 @@ export const create = async(req, res) => {
             web,
             notas
         } = req.body;
-        const laboratorios = await laboratoriosModel.create({
+        
+
+        const laboratorios = await laboratoriosModel.findAll({
+            where:{usuario_id},
+            order: [['fecha_creacion', 'desc']]
+        })
+
+        const laboratorio_codigo = createCode({
+            data: laboratorios,
+            code_field: 'laboratorio_codigo',
+            prefix: 'OSCAR'
+        });
+
+        const laboratorio = await laboratoriosModel.create({
 
             usuario_id,
             laboratorio_codigo,
@@ -65,8 +77,8 @@ export const create = async(req, res) => {
         })
         res.json({
             succes: true,
-            massage: 'Labratorio creado',
-            data: laboratorios
+            massage: 'Laboratorio creado',
+            data: laboratorio
         })
     } catch (error) {
         res.json({
@@ -74,7 +86,7 @@ export const create = async(req, res) => {
             massage: 'Laboratorio no creado',
             error
         })
-
+        console.log(error)
     }
 
 }

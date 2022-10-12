@@ -18,7 +18,5 @@ export const getAll = async(req, res) => {
     }
 
 }
-export const getOne = async(req, res) => {}
-export const cretae = async(req, res) => {}
-export const deleteone = async(req, res) => {}
+
 export const update = async(req, res) => {}

@@ -56,6 +56,9 @@ export const create = async(req, res) => {
             notas
         } = req.body;
 
+        // Aqui va function codigo
+
+
         const paciente = await PacienteModel.create({
                 usuario_id,
                 paciente_codigo,
