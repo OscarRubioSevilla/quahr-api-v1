@@ -53,10 +53,7 @@ export const create = async(req, res) => {
             contacto_emergencia,
             contacto_emergencia_parentezco,
             contacto_emergencia_telefono,
-            notas,
-            fecha_registro,
-            fecha_modificacion,
-            fecha_ultima_consulta
+            notas
         } = req.body;
 
         const paciente = await PacienteModel.create({
@@ -72,10 +69,7 @@ export const create = async(req, res) => {
                 contacto_emergencia,
                 contacto_emergencia_parentezco,
                 contacto_emergencia_telefono,
-                notas,
-                fecha_registro,
-                fecha_modificacion,
-                fecha_ultima_consulta
+                notas
             }
 
         )
@@ -96,8 +90,6 @@ export const create = async(req, res) => {
 export const update = async(req, res) => {
     try {
         const {
-            usuario_id,
-            paciente_codigo,
             nombre,
             apellido_paterno,
             apellido_materno,
@@ -108,14 +100,9 @@ export const update = async(req, res) => {
             contacto_emergencia,
             contacto_emergencia_parentezco,
             contacto_emergencia_telefono,
-            notas,
-            fecha_registro,
-            fecha_modificacion,
-            fecha_ultima_consulta
+            notas
         } = req.body;
         const paciente = await PacienteModel.update({
-            usuario_id,
-            paciente_codigo,
             nombre,
             apellido_paterno,
             apellido_materno,
@@ -126,11 +113,7 @@ export const update = async(req, res) => {
             contacto_emergencia,
             contacto_emergencia_parentezco,
             contacto_emergencia_telefono,
-            notas,
-            fecha_registro,
-            fecha_modificacion,
-            fecha_ultima_consulta
-
+            notas
         }, { where: { id: req.params.id } })
         res.json({
             success: true,

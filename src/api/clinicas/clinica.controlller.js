@@ -52,10 +52,6 @@ export const getOne = async(req, res) => {
     // create
 export const create = async(req, res) => {
         try {
-
-
-            console.log(req.body)
-
             const {
                 nombre,
                 telefono_fijo,
@@ -154,7 +150,7 @@ export const update = async(req, res) => {
         // Validar cuando sea necesario
 
         // Solo actualizar los campos permitidos
-        const clinica = await ClinicaModel.update({
+        await ClinicaModel.update({
             nombre,
             telefono_fijo,
             telefono_celular,

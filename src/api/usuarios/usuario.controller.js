@@ -1,5 +1,6 @@
 import UsuarioModel from "./usuario.model.js";
 import clinicaModel from "../clinicas/clinica.model.js";
+import UsuarioDireccionModel from "../usuarios_direccion/usuarios_direccion.model.js";
 
 // Get all retorna todos los datos
 export const getAll = async(req, res) => {
@@ -13,6 +14,10 @@ export const getAll = async(req, res) => {
 
                     model: clinicaModel,
                     as: 'clinica'
+                },
+                include: {
+                    model: UsuarioDireccionModel,
+                    as: 'direccion'
                 }
             });
             res.json({
@@ -46,10 +51,6 @@ export const getOne = async(req, res) => {
     // create
 export const create = async(req, res) => {
         try {
-
-
-            console.log(req.body)
-
             const {
                 clinica_id,
                 tipo_usuario,
@@ -60,7 +61,6 @@ export const create = async(req, res) => {
                 fecha_codigo_verificacion,
                 intentos_login,
                 recuperar_password_hash,
-                fecha_registro,
                 ultimo_inicio,
                 email_secundario,
                 nombre,
@@ -92,7 +92,6 @@ export const create = async(req, res) => {
                 fecha_codigo_verificacion,
                 intentos_login,
                 recuperar_password_hash,
-                fecha_registro,
                 ultimo_inicio,
                 email_secundario,
                 nombre,
@@ -109,6 +108,11 @@ export const create = async(req, res) => {
                 ruta,
                 ruta_comunidad,
                 meses_visitas_panel
+            });
+
+            // Añadir usuario direccion (special methods) https://sequelize.org/docs/v6/core-concepts/assocs/#special-methodsmixins-added-to-instances
+            usuario.createDireccion({
+                calle: 'Mi calle'
             });
 
             res.json({
@@ -150,17 +154,6 @@ export const update = async(req, res) => {
     try {
 
         const {
-            clinica_id,
-            tipo_usuario,
-            email,
-            password,
-            verificacion_2pasos,
-            codigo_verificacion,
-            fecha_codigo_verificacion,
-            intentos_login,
-            recuperar_password_hash,
-            fecha_registro,
-            ultimo_inicio,
             email_secundario,
             nombre,
             apellido_paterno,
@@ -168,30 +161,17 @@ export const update = async(req, res) => {
             prefijo,
             especialidad,
             nombre_comunidad,
-            comunidad_fecha,
-            ingreso_comunidad,
             genero,
             cedula_profesional,
             visita_comunidad,
             ruta,
             ruta_comunidad,
-            meses_visitas_panel
+            calle
         } = req.body;
         // Validar cuando sea necesario
         // Solo actualizar los campos permitidos
 
-        const usuario = await UsuarioModel.update({
-            clinica_id,
-            tipo_usuario,
-            email,
-            password,
-            verificacion_2pasos,
-            codigo_verificacion,
-            fecha_codigo_verificacion,
-            intentos_login,
-            recuperar_password_hash,
-            fecha_registro,
-            ultimo_inicio,
+        await UsuarioModel.update({
             email_secundario,
             nombre,
             apellido_paterno,
@@ -199,20 +179,27 @@ export const update = async(req, res) => {
             prefijo,
             especialidad,
             nombre_comunidad,
-            comunidad_fecha,
-            ingreso_comunidad,
             genero,
             cedula_profesional,
             visita_comunidad,
             ruta,
-            ruta_comunidad,
-            meses_visitas_panel
+            ruta_comunidad
 
         }, {
             where: {
                 id: req.params.id
             }
         });
+
+
+        // Actualizar dirección
+        UsuarioDireccionModel.update({
+            calle
+        }, {
+            where: {
+                usuario_id: req.params.id
+            }
+        })
 
         res.json({
             success: true,

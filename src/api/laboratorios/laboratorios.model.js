@@ -8,12 +8,13 @@ export default sequelize.define('laboratoriosModel', {
         primaryKey: true,
         type: DataTypes.BIGINT,
         autoIncrement: true,
-        allowNull: true
+        allowNull: false
     },
-
+    // allow null: true -> nulo
+    // alow null: false -> no nulo - required
     usuario_id: {
         type: DataTypes.BIGINT,
-        allowNull: true,
+        allowNull: false,
         references: {
             model: UsuarioModel,
             key: 'id'
@@ -21,43 +22,37 @@ export default sequelize.define('laboratoriosModel', {
     },
     laboratorio_codigo: {
         type: DataTypes.STRING(20),
-        allowNull: true
+        unique: true,
+        allowNull: false
     },
     nombre: {
         type: DataTypes.STRING(50),
-        allowNull: true
+        allowNull: false
     },
     contacto: {
-        type: DataTypes.STRING(50),
-        allowNull: true
+        type: DataTypes.STRING(50)
     },
     telefono_fijo: {
-        type: DataTypes.INTEGER(15),
-        allowNull: true
+        type: DataTypes.INTEGER(15)
     },
     telefono_celular: {
-        type: DataTypes.INTEGER(15),
-        allowNull: true
+        type: DataTypes.INTEGER(15)
     },
     correo_electronico: {
         type: DataTypes.STRING(50),
         unique: true,
-        allowNull: true,
         validate: {
             isEmail: true
         }
     },
     web: {
-        type: DataTypes.STRING(150),
-        allowNull: true
+        type: DataTypes.STRING(150)
     },
     notas: {
-        type: DataTypes.STRING(250),
-        allowNull: true
+        type: DataTypes.STRING(250)
     },
     fecha_ultima_consulta: {
-        type: DataTypes.DATE,
-        allowNull: true
+        type: DataTypes.DATE
     }
 
 

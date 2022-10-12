@@ -49,8 +49,7 @@ export const create = async(req, res) => {
             telefono_celular,
             correo_electronico,
             web,
-            notas,
-            fecha_ultima_consulta
+            notas
         } = req.body;
         const laboratorios = await laboratoriosModel.create({
 
@@ -62,8 +61,7 @@ export const create = async(req, res) => {
             telefono_celular,
             correo_electronico,
             web,
-            notas,
-            fecha_ultima_consulta
+            notas
         })
         res.json({
             succes: true,
@@ -100,21 +98,16 @@ export const deleteOne = async(req, res) => {
 export const update = async(req, res) => {
     try {
         const {
-            usuario_id,
-            laboratorio_codigo,
             nombre,
             contacto,
             telefono_fijo,
             telefono_celular,
             correo_electronico,
             web,
-            notas,
-            fecha_ultima_consulta
+            notas
         } = req.body
 
-        const laboratorio = await laboratoriosModel.update({
-            usuario_id,
-            laboratorio_codigo,
+        await laboratoriosModel.update({
             nombre,
             contacto,
             telefono_fijo,
@@ -123,12 +116,10 @@ export const update = async(req, res) => {
             web,
             notas,
             fecha_ultima_consulta
-        }, { where: { id: req.params.id } })
+        }, { where: { id: req.params.id } });
         res.json({
-
             succes: true,
-            massage: 'Laboratorio actualizado',
-            data: laboratorio
+            massage: 'Laboratorio actualizado'
         })
     } catch (error) {
         res.json({
