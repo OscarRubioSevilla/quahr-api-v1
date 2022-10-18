@@ -1,17 +1,31 @@
 import PacienteModel from "./paciente.model.js";
+import UsuarioModel from "../usuarios/usuario.model.js";
+import paciente_DireccionModel from "../pacientes_direccion/paciente_direccion.model.js";
+import { createCode } from "../../utils/utils.js";
+
 
 
 export const getAll = async(req, res) => {
 
     try {
-        const pacientes = await PacienteModel.findAll({})
+        const pacientes = await PacienteModel.findAll({
+            include: {
+
+                model: UsuarioModel,
+                as: 'usuario'
+            },
+            include: {
+                model: paciente_DireccionModel,
+                as: 'direccion'
+            }
+        })
         res.json({
             success: true,
             message: 'Pacientes obtenidos',
             data: pacientes
         })
     } catch (error) {
-        req.json({
+        res.json({
             success: true,
             massage: 'Pacientes no obtenidos'
         })
@@ -38,11 +52,9 @@ export const getOne = async(req, res) => {
 
 }
 export const create = async(req, res) => {
-
     try {
         const {
             usuario_id,
-            paciente_codigo,
             nombre,
             apellido_paterno,
             apellido_materno,
@@ -55,36 +67,55 @@ export const create = async(req, res) => {
             contacto_emergencia_telefono,
             notas
         } = req.body;
+        const paciente = await PacienteModel.findAll({
+            where: { usuario_id },
+            order: [
+                ['fecha_creacion', 'desc']
+            ]
+        })
+        const paciente_codigo = createCode({
+            data: paciente,
+            code_field: 'paciente_codigo',
+            prefix: 'PAC',
+        })
+
+
+        const pacientes = await PacienteModel.create({
+            usuario_id,
+            nombre,
+            paciente_codigo,
+            apellido_paterno,
+            apellido_materno,
+            fecha_nacimiento,
+            genero,
+            ocupacion,
+            email,
+            contacto_emergencia,
+            contacto_emergencia_parentezco,
+            contacto_emergencia_telefono,
+            notas
+
+        })
+
+        const a = await pacientes.createDireccion({
+            calle: 'alguna',
+            numero: 2
+        })
+        res(a)
 
         // Aqui va function codigo
 
 
-        const paciente = await PacienteModel.create({
-                usuario_id,
-                paciente_codigo,
-                nombre,
-                apellido_paterno,
-                apellido_materno,
-                fecha_nacimiento,
-                genero,
-                ocupacion,
-                email,
-                contacto_emergencia,
-                contacto_emergencia_parentezco,
-                contacto_emergencia_telefono,
-                notas
-            }
-
-        )
         res.json({
             success: true,
             message: 'Paciente creado',
-            data: paciente
+            data: pacientes
         })
     } catch (error) {
         res.json({
             success: true,
-            massage: 'Paciente no creado'
+            massage: 'Paciente no creado',
+            error
         })
 
     }

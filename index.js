@@ -30,6 +30,3 @@ app.listen(3000, function() {
 //await sequelize.dropAllSchemas();
 // revisa async await top level
 await sequelize.sync({ alter: true }); // Eliminará campos y registros
-
-
-console.log('Db connected')

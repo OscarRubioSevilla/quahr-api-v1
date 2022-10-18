@@ -1,10 +1,13 @@
 import { createCode } from "../../utils/utils.js";
+import Laboratorios_direccionModel from "../laboratorios_direccion/laboratorios_direccion.model.js";
 import laboratoriosModel from "./laboratorios.model.js";
 
 export const getAll = async(req, res) => {
     try {
 
-        const laboratorios = await laboratoriosModel.findAll()
+        const laboratorios = await laboratoriosModel.findAll({
+            include: { model: Laboratorios_direccionModel, as: 'direccion' }
+        })
         res.json({
             succes: true,
             massage: 'Laboratorios obtenidos',
@@ -50,17 +53,19 @@ export const create = async(req, res) => {
             web,
             notas
         } = req.body;
-        
+
 
         const laboratorios = await laboratoriosModel.findAll({
-            where:{usuario_id},
-            order: [['fecha_creacion', 'desc']]
+            where: { usuario_id },
+            order: [
+                ['fecha_creacion', 'desc']
+            ]
         })
 
         const laboratorio_codigo = createCode({
             data: laboratorios,
             code_field: 'laboratorio_codigo',
-            prefix: 'OSCAR'
+            prefix: 'LAB'
         });
 
         const laboratorio = await laboratoriosModel.create({
@@ -74,6 +79,11 @@ export const create = async(req, res) => {
             correo_electronico,
             web,
             notas
+        })
+
+        laboratorio.createDireccion({
+            calle: 'Marxo',
+            numero: 77
         })
         res.json({
             succes: true,

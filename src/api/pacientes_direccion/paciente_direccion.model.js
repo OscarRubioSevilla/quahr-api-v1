@@ -2,7 +2,6 @@ import { sequelize } from './../../db/sequelize.js';
 import { DataTypes } from 'sequelize';
 
 import PacienteModel from '../pacientes/paciente.model.js';
-import Direccion_model from '../direccion/direccion_model.js';
 
 
 export default sequelize.define('Paciente_direccionModel', {
@@ -21,34 +20,6 @@ export default sequelize.define('Paciente_direccionModel', {
                 key: 'id'
             }
         },
-        direccion_id: {
-            type: DataTypes.BIGINT,
-            allowNull: false,
-            references: {
-                model: Direccion_model,
-                key: 'id'
-            }
-        },
-        calle: {
-            type: DataTypes.STRING(100),
-            allowNull: false
-        },
-        numero: {
-            type: DataTypes.STRING(10),
-            allowNull: false
-        },
-        numero_interior: {
-            type: DataTypes.STRING(10),
-            allowNull: false
-        },
-        cp: {
-            type: DataTypes.STRING(20),
-            allowNull: false
-        },
-        localidad: {
-            type: DataTypes.STRING(30),
-
-        },
         municipio_id: {
             type: DataTypes.INTEGER,
 
@@ -59,6 +30,26 @@ export default sequelize.define('Paciente_direccionModel', {
         },
         pais_id: {
             type: DataTypes.INTEGER,
+
+        },
+        calle: {
+            type: DataTypes.STRING(100),
+            allowNull: true
+        },
+        numero: {
+            type: DataTypes.STRING(10),
+            allowNull: true
+        },
+        numero_interior: {
+            type: DataTypes.STRING(10),
+            allowNull: true
+        },
+        cp: {
+            type: DataTypes.STRING(20),
+            allowNull: true
+        },
+        localidad: {
+            type: DataTypes.STRING(30),
 
         }
 

@@ -3,34 +3,33 @@
 // Aunque lo ideal y buena practica es que solo importes los modelos relacionados si los necesitas
 import ClinicaModel from './clinica.model.js';
 import UsuarioModel from '../usuarios/usuario.model.js';
+import ClinicasDireccion from '../clinicas_direccion/clinicas_direccion.model.js'
 
 // Get all retorna todos los datos
-
 export const getAll = async(req, res) => {
-    try {
-        const clinicas = await ClinicaModel.findAll({
-            include: [{
-                model: UsuarioModel,
-                as: 'usuarios',
+        try {
+            const clinicas = await ClinicaModel.findAll({
                 include: {
-                    model: ClinicaModel,
-                    as: 'clinica'
+                    model: UsuarioModel,
+                    as: 'usuarios',
+                    include: {
+                        model: ClinicaModel,
+                        as: 'clinica'
+                    },
                 }
-            }]
-        });
+            });
 
-        res.json({
-            success: true,
-            message: 'Clinicas obtenidas',
-            data: clinicas
+            res.json({
+                success: true,
+                message: 'Clinicas obtenidas',
+                data: clinicas
 
-        })
-    } catch (error) {
+            })
+        } catch (error) {
 
+        }
     }
-}
-
-// get one
+    // get one
 export const getOne = async(req, res) => {
         try {
 
@@ -89,6 +88,11 @@ export const create = async(req, res) => {
                 firma_mail,
                 ruta
             });
+
+            clinica.createDireccion({
+                calle: 'una calle',
+                numero: 7
+            })
 
             res.json({
                 success: true,

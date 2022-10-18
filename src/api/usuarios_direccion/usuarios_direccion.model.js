@@ -17,6 +17,17 @@ export default sequelize.define('UsuarioDireccion', {
         },
         allowNull: false
     },
+
+    municipio_id: {
+        type: DataTypes.INTEGER,
+    },
+    estado_id: {
+        type: DataTypes.INTEGER,
+
+    },
+    pais_id: {
+        type: DataTypes.INTEGER,
+    },
     calle: {
         type: DataTypes.STRING(100)
     },
@@ -31,15 +42,5 @@ export default sequelize.define('UsuarioDireccion', {
     },
     localidad: {
         type: DataTypes.STRING(30)
-    },
-    municipio_id: {
-        type: DataTypes.INTEGER,
-    },
-    estado_id: {
-        type: DataTypes.INTEGER,
-
-    },
-    pais_id: {
-        type: DataTypes.INTEGER,
     }
 }, { tableName: 'usuarios_direccion' })
