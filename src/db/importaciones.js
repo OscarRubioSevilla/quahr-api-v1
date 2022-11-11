@@ -11,7 +11,7 @@ import '../../src/api/laboratorios_ordenes/laboratorio_ordenes.model.js';
 import '../api/laboratorios_direccion/laboratorios_direccion.model.js';
 import '../api/eventos/evento.model.js'
 import '../api/eventos/eventos_cita_detalle.model.js';
-import '../api/eventos/eventos_laboratorio_detalle.model.js';
+import '../api/eventos/eventos_orden_detalle.model.js';
 
 
 

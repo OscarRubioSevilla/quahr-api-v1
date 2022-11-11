@@ -1,6 +1,7 @@
 import { sequelize } from "../../db/sequelize.js";
 import { DataTypes } from "sequelize";
-import pacienteModel from "../pacientes/paciente.model.js";
+import PacienteModel from "../pacientes/paciente.model.js";
+import EventoModel from "./evento.model.js";
 
 export default sequelize.define('Evento_cita_detalleModel', {
 
@@ -10,10 +11,17 @@ export default sequelize.define('Evento_cita_detalleModel', {
         autoIncrement: true,
         allowNull: false
     },
+    evento_id: {
+        type: DataTypes.BIGINT,
+        references: {
+            model: EventoModel,
+            key: 'id'
+        }
+    },
     paciente_id: {
         type: DataTypes.BIGINT,
         references: {
-            model: pacienteModel,
+            model: PacienteModel,
             key: 'id'
         }
     },

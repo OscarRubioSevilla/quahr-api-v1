@@ -14,7 +14,7 @@ apiRoutes.get('/', function(req, res) {
 apiRoutes.use('/clinica', routesClinica);
 apiRoutes.use('/usuario', routesUsuario);
 apiRoutes.use('/paciente', routesPaciente);
-apiRoutes.use('/laboratorios', routesLaboratorio);
+apiRoutes.use('/laboratorio', routesLaboratorio);
 apiRoutes.use('/laboratorio_ordenes', routesLaboratorio_ordenes)
 apiRoutes.use('/evento', routesEvento)
 

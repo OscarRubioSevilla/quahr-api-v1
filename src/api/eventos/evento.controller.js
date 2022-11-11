@@ -39,20 +39,29 @@ export const getOne = async(req, res) => {
 export const create = async(req, res) => {
     try {
         const {
-            usario_id,
+            usuario_id,
             google_evento_id,
             status,
             descripcion,
             comentarios
         } = req.body;
         const evento = await eventoModel.create({
-            usario_id,
+            usuario_id,
             google_evento_id,
             status,
             descripcion,
             comentarios
 
-        })
+        });
+
+        // Validar los tipos orden y cita
+
+        // cita
+        // Guardar en eventos_cita_detalle
+        // Orden
+        // Guardar en eventos_orden_detalle
+
+
         res.json({
             succes: true,
             massage: 'Evento creado',

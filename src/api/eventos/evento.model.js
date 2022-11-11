@@ -8,10 +8,11 @@ export default sequelize.define('EventosModel', {
         type: DataTypes.BIGINT,
         primaryKey: true,
         autoIncrement: true,
+        allowNull: false
     },
-
-    id_usuario: {
+    usuario_id: {
         type: DataTypes.BIGINT,
+        allowNull: false,
         references: {
             model: UsuariosModel,
             key: 'id'
@@ -32,10 +33,10 @@ export default sequelize.define('EventosModel', {
     fecha_inicio: {
         type: DataTypes.DATE
     },
-    fecha_inicio: {
+    hora_inicio: {
         type: DataTypes.TIME
     },
-    fecha_fin: {
+    hora_fin: {
         type: DataTypes.TIME
     },
     comentarios: {
