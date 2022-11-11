@@ -9,6 +9,9 @@ export const sequelize = new Sequelize('api-v1', 'root', '', {
     }
 })
 
+
+
+
 // puedes trabajar sin problema con el web phpmyadmin es mucho mejor que workbench - si te causa problemas pue
 // instalar otro cliente de mysql, heidiSQL
 // Con eso ya tendrías conexión solo cambia los datos de arriba

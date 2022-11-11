@@ -1,6 +1,7 @@
 // Aqui van los metodos de las rutas
 // Puedes importar los modelos que requieras
 // Aunque lo ideal y buena practica es que solo importes los modelos relacionados si los necesitas
+
 import ClinicaModel from './clinica.model.js';
 import UsuarioModel from '../usuarios/usuario.model.js';
 import ClinicasDireccion from '../clinicas_direccion/clinicas_direccion.model.js'
@@ -26,7 +27,12 @@ export const getAll = async(req, res) => {
 
             })
         } catch (error) {
+            res.json({
+                success: true,
+                message: 'Clinicas no obtenidas',
+                data: error
 
+            })
         }
     }
     // get one
@@ -92,6 +98,10 @@ export const create = async(req, res) => {
             clinica.createDireccion({
                 calle: 'una calle',
                 numero: 7
+            })
+            clinica.createConfiguracion({
+                paquete: 1,
+                status: 0
             })
 
             res.json({

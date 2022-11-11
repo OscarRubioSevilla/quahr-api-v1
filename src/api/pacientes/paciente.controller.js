@@ -97,11 +97,11 @@ export const create = async(req, res) => {
 
         })
 
-        const a = await pacientes.createDireccion({
+        await pacientes.createDireccion({
             calle: 'alguna',
             numero: 2
         })
-        res(a)
+
 
         // Aqui va function codigo
 

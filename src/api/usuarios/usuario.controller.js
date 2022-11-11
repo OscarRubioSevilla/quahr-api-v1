@@ -111,9 +111,9 @@ export const create = async(req, res) => {
             });
 
             // Añadir usuario direccion (special methods) https://sequelize.org/docs/v6/core-concepts/assocs/#special-methodsmixins-added-to-instances
-            usuario.createDireccion({
-                calle: 'Mi calle'
-            });
+            // await usuario.createDireccion({
+            //     calle: 'Mi calle'
+            // });
 
             res.json({
                 success: true,

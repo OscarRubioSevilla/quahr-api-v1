@@ -9,6 +9,10 @@ import UsuariosDireccion from '../../src/api/usuarios_direccion/usuarios_direcci
 import LaboratorioModel from '../..//src/api/laboratorios/laboratorios.model.js'
 import OrdenesLaboratorioModel from "../api/laboratorios_ordenes/laboratorio_ordenes.model.js";
 import LaboratorioDireccion from '../api/laboratorios_direccion/laboratorios_direccion.model.js'
+import EventosModel from '../api/eventos/evento.model.js';
+import EvenCitaDetalleModel from '../api/eventos/eventos_cita_detalle.model.js';
+import EventoLaboratorioDetalleModel from '../api/eventos/eventos_laboratorio_detalle.model.js';
+
 
 
 // Ok ahora se debe de relacionar
@@ -55,11 +59,22 @@ LaboratorioModel.hasMany(OrdenesLaboratorioModel, { foreignKey: 'laboratorio_id'
 OrdenesLaboratorioModel.belongsTo(LaboratorioModel, { foreignKey: 'laboratorio_id', as: 'laboratorio' })
 
 PacienteModel.hasMany(OrdenesLaboratorioModel, { foreignKey: 'paciente_id', as: 'ordenes' });
-OrdenesLaboratorioModel.belongsTo(PacienteModel, { foreignKey: 'paciente_id', as: 'paciente' })
-
+OrdenesLaboratorioModel.belongsTo(PacienteModel, { foreignKey: 'paciente_id', as: 'paciente' });
 
 LaboratorioModel.hasOne(LaboratorioDireccion, { foreignKey: 'laboratorio_id', as: 'direccion' });
 LaboratorioDireccion.belongsTo(LaboratorioModel, { foreignKey: 'laboratorio_id', as: 'laboratorio' });
+
+EventosModel.hasOne(EventoLaboratorioDetalleModel, { foreignKey: 'evento_id', as: 'laboratoriodetalle' });
+EventoLaboratorioDetalleModel.belongsTo(EventosModel, { foreignKey: 'evento_id', as: 'evento' });
+
+LaboratorioModel.hasOne(EventoLaboratorioDetalleModel, { foreignKey: 'laboratorio_id', as: 'laboratoriodetalle' })
+EventoLaboratorioDetalleModel.belongsTo(LaboratorioModel, { foreignKey: 'laboratorio_id', as: 'laboratorio' })
+
+OrdenesLaboratorioModel.hasOne(EventoLaboratorioDetalleModel, { foreignKey: 'orden_id', as: 'laboratoriodetalle' })
+EventoLaboratorioDetalleModel.belongsTo(OrdenesLaboratorioModel, { foreignKey: 'orden_id', as: 'ordenes' })
+
+PacienteModel.hasOne(EventoLaboratorioDetalleModel, { foreignKey: 'paciente_id', as: 'laboratoriodetalle' });
+EventoLaboratorioDetalleModel.belongsTo(PacienteModel, { foreignKey: 'paciente_id', as: 'paciente' })
 
 
 

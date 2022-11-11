@@ -7,18 +7,11 @@ export default sequelize.define('Clinicas_configuracionModel', {
 
     id: {
         primaryKey: true,
+        autoIncrement: true,
         type: DataTypes.BIGINT,
         allowNull: false
     },
     clinica_id: {
-        type: DataTypes.BIGINT,
-        allowNull: false,
-        references: {
-            model: ClinicaModel,
-            key: 'id'
-        }
-    },
-    configuracion_id: {
         type: DataTypes.BIGINT,
         allowNull: false,
         references: {
@@ -35,8 +28,7 @@ export default sequelize.define('Clinicas_configuracionModel', {
         defaultValue: 0
     },
     verificar_email_hash: {
-        type: DataTypes.STRING(32),
-        allowNull: false
+        type: DataTypes.STRING(32)
     },
     tipo_cuenta: {
         type: DataTypes.ENUM('prueba', 'normal'),
