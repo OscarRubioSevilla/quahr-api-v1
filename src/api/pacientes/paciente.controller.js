@@ -112,8 +112,9 @@ export const create = async(req, res) => {
             data: pacientes
         })
     } catch (error) {
+        console.log(error)
         res.json({
-            success: true,
+            success: false,
             massage: 'Paciente no creado',
             error
         })

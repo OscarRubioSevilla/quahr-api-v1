@@ -52,8 +52,7 @@ export default sequelize.define('PacienteModel', {
         }
     },
     contacto_emergencia: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+        type: DataTypes.INTEGER
     },
     contacto_emergencia_parentesco: {
         type: DataTypes.INTEGER
