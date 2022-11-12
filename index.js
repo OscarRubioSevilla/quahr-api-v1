@@ -9,10 +9,13 @@ import { sequelize } from "./src/db/sequelize.js";
 import './src/db/importaciones.js'; // no lleva un nombre solo importas el archivo
 
 const app = express();
-
+const corsOptions = {
+    origin: true, //included origin as true
+    credentials: true, //included credentials as true
+};
 // middlewares
 // app.use(morgan('dev')) // Muestra las peticiones que se hacen al servidor
-app.use(cors()) // Controla quien accede al servidor y puede hacer las peticiones
+app.use(cors(corsOptions)) // Controla quien accede al servidor y puede hacer las peticiones
 app.use(express.json()) // Parse los datos que se envían en la peticion de post put patch y otros req.body
 app.use(morgan('dev'))
 
@@ -27,6 +30,9 @@ app.listen(3000, function() {
     console.log('Servidor corriendo en http://localhost:3000')
 })
 
+
+// IMPORTAR DATOS
+
 //await sequelize.dropAllSchemas();
 // revisa async await top level
-await sequelize.sync({ alter: true }); // Eliminará campos y registros
+await sequelize.sync(); // Eliminará campos y registros
