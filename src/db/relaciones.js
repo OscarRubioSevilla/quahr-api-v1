@@ -46,12 +46,13 @@ ClinicasDireccion.belongsTo(ClinicaModel, { foreignKey: 'clinica_id', as: 'cilin
 UsuarioModel.hasMany(EventoModel, { foreignKey: 'usuario_id', as: 'eventos' });
 EventoModel.belongsTo(UsuarioModel, { foreignKey: 'usuario_id', as: 'usuario' });
 
+
 // Eventos
-EventoModel.hasOne(EventoCitaDetalleModel, { foreignKey: 'evento_id', as: 'evento_detalle' });
+EventoModel.hasOne(EventoCitaDetalleModel, { foreignKey: 'evento_id', as: 'cita_detalle' });
 EventoCitaDetalleModel.belongsTo(EventoModel, { foreignKey: 'evento_id', as: 'evento' });
 
-PacienteModel.hasMany(EventoModel, { foreignKey: 'evento_id', as: 'eventos' });
-EventoModel.belongsTo(PacienteModel, { foreignKey: 'evento_id', as: 'paciente' });
+PacienteModel.hasMany(EventoCitaDetalleModel, { foreignKey: 'paciente_id', as: 'eventos' });
+EventoCitaDetalleModel.belongsTo(PacienteModel, { foreignKey: 'paciente_id', as: 'paciente' });
  
 UsuarioModel.hasOne(UsuariosDireccion, { foreignKey: 'usuario_id', as: 'direccion' });
 UsuariosDireccion.belongsTo(UsuarioModel, { foreignKey: 'usuario_id', as: 'usuario' });
@@ -61,7 +62,6 @@ PacientesDireccionModel.belongsTo(PacienteModel, { foreignKey: 'paciente_id', as
 
 UsuarioModel.hasMany(LaboratorioModel, { foreignKey: 'usuario_id', as: 'laboratorios' });
 LaboratorioModel.belongsTo(UsuarioModel, { foreignKey: 'usuario_id', as: 'usuario' });
-
 
 // Ordenes Usuario
 UsuarioModel.hasMany(OrdenesLaboratorioModel, { foreignKey: 'usuario_id', as: 'ordenes' })
