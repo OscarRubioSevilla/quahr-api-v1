@@ -15,7 +15,7 @@ apiRoutes.use('/clinica', routesClinica);
 apiRoutes.use('/usuario', routesUsuario);
 apiRoutes.use('/paciente', routesPaciente);
 apiRoutes.use('/laboratorio', routesLaboratorio);
-apiRoutes.use('/laboratorio_ordenes', routesLaboratorio_ordenes)
+apiRoutes.use('/orden', routesLaboratorio_ordenes)
 apiRoutes.use('/evento', routesEvento)
 
 
