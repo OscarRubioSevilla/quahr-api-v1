@@ -10,11 +10,11 @@ export default sequelize.define('laboratorio_ordenesModel', {
         type: DataTypes.BIGINT,
         primaryKey: true,
         autoIncrement: true,
-        allowNull: true,
+        allowNull: false,
     },
     usuario_id: {
         type: DataTypes.BIGINT,
-        allowNull: true,
+        allowNull: false,
         references: {
             model: usuarioModel,
             key: 'id'
@@ -22,7 +22,7 @@ export default sequelize.define('laboratorio_ordenesModel', {
     },
     laboratorio_id: {
         type: DataTypes.BIGINT,
-        allowNull: true,
+        allowNull: false,
         references: {
             model: laboratoriosModel,
             key: 'id'
@@ -30,7 +30,7 @@ export default sequelize.define('laboratorio_ordenesModel', {
     },
     paciente_id: {
         type: DataTypes.BIGINT,
-        allowNull: true,
+        allowNull: false,
         references: {
             model: pacienteModel,
             key: 'id'
@@ -38,43 +38,35 @@ export default sequelize.define('laboratorio_ordenesModel', {
     },
     presupuesto_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
     },
     orden_codigo: {
         type: DataTypes.STRING(15),
-        allowNull: true
+        allowNull: false
     },
     fecha_solicitud: {
-        type: DataTypes.DATE,
-        allowNull: true,
+        type: DataTypes.DATE
     },
     fecha_entrega: {
-        type: DataTypes.DATE,
-        allowNull: true,
+        type: DataTypes.DATE
     },
     status: {
-        type: DataTypes.ENUM('En Proceso', 'Finalizado', 'Cancelado'),
-        allowNull: true
+        type: DataTypes.ENUM('En Proceso', 'Finalizado', 'Cancelado')
     },
     trabajo_id: {
-        type: DataTypes.INTEGER(11),
-        allowNull: true
+        type: DataTypes.INTEGER(11)
     },
     tipo_trabajo: {
-        type: DataTypes.INTEGER(11),
-        allowNull: true
+        type: DataTypes.INTEGER(11)
     },
     colorimetro_id: {
-        type: DataTypes.INTEGER(11),
-        allowNull: true
+        type: DataTypes.INTEGER(11)
     },
     color: {
-        type: DataTypes.STRING(50),
-        allowNull: true
+        type: DataTypes.STRING(50)
     },
     area_pieza: {
-        type: DataTypes.STRING(50),
-        allowNull: true
+        type: DataTypes.STRING(50)
     },
     material_id: {
         type: DataTypes.INTEGER(11),
@@ -86,7 +78,7 @@ export default sequelize.define('laboratorio_ordenesModel', {
     },
     costo: {
         type: DataTypes.DECIMAL(15, 2),
-        allowNull: true
+        allowNull: false
     }
 
 }, { tableName: 'laboratorio_ordenes' })
