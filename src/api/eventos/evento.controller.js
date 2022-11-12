@@ -41,18 +41,34 @@ export const create = async(req, res) => {
         const {
             usuario_id,
             google_evento_id,
-            status,
+            tipo,
             descripcion,
             comentarios
         } = req.body;
+
         const evento = await eventoModel.create({
             usuario_id,
             google_evento_id,
-            status,
+            tipo,
             descripcion,
             comentarios
 
         });
+
+        if (tipo == 'Orden') {
+            await evento.createOrden_detalle({
+                evento_id: 2,
+                orden_id: 2
+            })
+            console.log('Orden_Detalle creado')
+
+        } else if (tipo == 'Cita') {
+            await evento.createEvento_detalle({
+                evento_id: 2,
+                paciente_id: 2
+            })
+            console.log('Evento_Detalle creado')
+        }
 
         // Validar los tipos orden y cita
 

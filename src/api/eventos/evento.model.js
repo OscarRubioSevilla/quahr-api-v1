@@ -21,8 +21,9 @@ export default sequelize.define('EventosModel', {
     google_evento_id: {
         type: DataTypes.STRING(255),
     },
-    status: {
-        type: DataTypes.ENUM('Cita', 'Evento', 'Orden')
+    tipo: {
+        type: DataTypes.ENUM('Cita', 'Evento', 'Orden'),
+        defaultValue: 'Evento'
     },
     descripcion: {
         type: DataTypes.STRING(200)
