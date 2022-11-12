@@ -1,13 +1,40 @@
+import PacienteModel from "../pacientes/paciente.model.js";
 import eventoModel from "./evento.model.js"
-
-
+import EventoCitaDetalleModel from "./eventos_cita_detalle.model.js";
+import EventoOrdenDetalleModel from "./eventos_orden_detalle.model.js";
+import usuarioModel from "../usuarios/usuario.model.js";
 export const getAll = async(req, res) => {
     try {
-        const eventos = await eventoModel.findAll()
+        const citas = await eventoModel.findAll({ 
+            include: {
+                model: EventoCitaDetalleModel,
+                as: 'cita_detalle',
+                include: {
+                    model: PacienteModel,
+                    as: 'paciente'
+                }
+            },
+            where: {tipo: 'Cita', 'usuario_id': 1 } 
+        });
+
+        const ordenes = await eventoModel.findAll({ 
+            include: {
+                model: EventoOrdenDetalleModel,
+                as: 'orden_detalle'
+            },
+            where: {tipo: 'Orden'} 
+        });
+
+        const eventos = await eventoModel.findAll({ 
+            where: {tipo: 'Evento'} 
+        });
+
+        const usuario_eventos = [...citas, ...ordenes, ...eventos];
+
         res.json({
             succes: true,
             massage: 'Eventos Obtenidos',
-            data: eventos
+            data: usuario_eventos
         })
     } catch (error) {
         res.json({
@@ -40,32 +67,34 @@ export const create = async(req, res) => {
     try {
         const {
             usuario_id,
-            google_evento_id,
             tipo,
+            orden_id,
+            paciente_id,
             descripcion,
             comentarios
         } = req.body;
 
         const evento = await eventoModel.create({
             usuario_id,
-            google_evento_id,
             tipo,
             descripcion,
             comentarios
-
         });
 
+        const evento_id = evento?.id || 0;
+
         if (tipo == 'Orden') {
+ 
             await evento.createOrden_detalle({
-                evento_id: 2,
-                orden_id: 2
+                evento_id,
+                orden_id
             })
             console.log('Orden_Detalle creado')
 
         } else if (tipo == 'Cita') {
-            await evento.createEvento_detalle({
-                evento_id: 2,
-                paciente_id: 2
+            await evento.createCita_detalle({
+                evento_id,
+                paciente_id
             })
             console.log('Evento_Detalle creado')
         }
@@ -84,6 +113,7 @@ export const create = async(req, res) => {
             data: evento
         })
     } catch (error) {
+        console.log(error)
         res.json({
             succes: true,
             massage: 'Evento no creado',

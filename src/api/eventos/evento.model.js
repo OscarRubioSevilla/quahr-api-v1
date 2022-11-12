@@ -18,12 +18,13 @@ export default sequelize.define('EventosModel', {
             key: 'id'
         }
     },
-    google_evento_id: {
-        type: DataTypes.STRING(255),
-    },
     tipo: {
         type: DataTypes.ENUM('Cita', 'Evento', 'Orden'),
         defaultValue: 'Evento'
+    },
+    status: {
+        type: DataTypes.ENUM('Por confirmar', 'Confirmado', 'Cancelado'),
+        defaultValue: 'Por confirmar'
     },
     descripcion: {
         type: DataTypes.STRING(200)
@@ -42,7 +43,9 @@ export default sequelize.define('EventosModel', {
     },
     comentarios: {
         type: DataTypes.TEXT
+    },
+    google_evento_id: {
+        type: DataTypes.STRING(255),
     }
-
 
 }, { tableName: 'eventos' })
