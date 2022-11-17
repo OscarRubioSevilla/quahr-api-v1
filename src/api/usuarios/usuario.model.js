@@ -1,6 +1,7 @@
 import { sequelize } from "../../db/sequelize.js";
 import { DataTypes } from 'sequelize'; // define tipos
 import ClinicaModel from "../../api/clinicas/clinica.model.js";
+import { encriptar } from "../../utils/crypt.js";
 // Muy bien así si
 // AHora hay algo que debes de ver
 // Cuando exportas con nombre es porque probablemente exportaras mas objetos desde ese msmo archivo
@@ -117,5 +118,17 @@ export default sequelize.define('UsuarioModel', {
         type: DataTypes.INTEGER(2)
     }
 }, {
+    hooks: {
+        beforeCreate: async(usuario) => {
+            if (usuario.password) {
+                usuario.password = await encriptar(usuario.password);
+            }
+        },
+        beforeUpdate: async(usuario) => {
+            if (usuario.password) {
+                usuario.password = await encriptar(usuario.password);
+            }
+        }
+    },
     tableName: 'usuarios'
-});
+}, );

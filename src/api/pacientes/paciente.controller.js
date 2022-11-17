@@ -76,7 +76,7 @@ export const create = async(req, res) => {
         const paciente_codigo = createCode({
             data: paciente,
             code_field: 'paciente_codigo',
-            prefix: 'PAC',
+            prefix: 'PA',
         })
 
 
