@@ -3,45 +3,48 @@ import UsuarioModel from '../usuarios/usuario.model.js'
 import { crearToken } from '../../utils/jwt.js';
 
 
-
-
 export const login = async(req, res) => {
 
     try {
-        const usuario = await UsuarioModel.findOne({ where: { email: req.body.email } });
-        const pass_body = req.body.password;
-        const pas_usa = usuario.password;
-        const ema = req.body.email;
-        const us_ = usuario.email
-        if (!usuario) {
-            res.json({
-                mensaje: "Correo o contraseña incorrecto",
-                codigo: 500
 
-            })
+        if (!req.body.password && !req.body.email) {
+            return res.json({
+                success: false,
+                message: "Correo o contraseña incorrectos"
+            }).status(401);
+        }
+
+        const usuario = await UsuarioModel.findOne({ where: { email: req.body.email } });
+        if (!usuario) {
+            return res.json({
+                success: false,
+                message: "Correo o contraseña incorrectos"
+            }).status(401);
         }
         const validado = await comparar(req.body.password, usuario.password);
         if (validado) {
             const token = crearToken(usuario);
 
-            res.json({
-                mensaje: 'Autenticación correcta',
-                token,
-                codigo: 200
+            res.cookie("refreshToken", token, {
+                httpOnly: true,
+                secure: false, // ssl
+                expires: new Date(Date.now() + ((60*20) * 1000))
             });
+
+            res.json({
+                success: true,
+                message: 'Sesión iniciada'
+            }).status(200);
         } else {
             res.json({
-                mensaje: "Contraseña o correo incorrecto",
-                codigo: 500,
-                pass_body,
-                pas_usa,
-                ema,
-                us_
-            });
+                success: false,
+                message: "Correo o contraseña incorrectos"
+            }).status(401);
         }
     } catch (error) {
         res.json({
-            mensaje: error.message
+            success: false,
+            message: error.message
         });
     }
 }

@@ -15,7 +15,7 @@ apiRoutes.get('/', function(req, res) {
     res.send('Api. v1').status(200);
 })
 
-apiRoutes.use('/clinica', usuarioValidado, routesClinica);
+apiRoutes.use('/clinica', routesClinica);
 apiRoutes.use('/usuario', routesUsuario);
 apiRoutes.use('/paciente', routesPaciente);
 apiRoutes.use('/laboratorio', routesLaboratorio);
